@@ -3,15 +3,28 @@ function log {
     echo "$*"
 }
 
-# Update configuration on first start to hide app menu and add DuckDuckGo as a
-# text search option.
-if [ ! -f $SNAP_USER_DATA/.config/Typora/conf/conf.user.json ]; then
-  CONF=$(sed 's| //.*||' $SNAP/resources/app/conf.default.json | tail -n +2)
+# Update user configuration on first start to hide app menu and add DuckDuckGo
+# as secondary text search option. Comments cause issues so they are stripped.
+if [ ! -f "$SNAP_USER_DATA/.config/Typora/conf/conf.user.json" ]; then
+  CONF=$(sed 's| //.*||' "$SNAP/typora/resources/app/conf.default.json" | tail -n +2)
   CONF=$(echo "${CONF}" | jq '.autoHideMenuBar = "true"')
   CONF=$(echo "${CONF}" | jq '.searchService[1] = ["Search with DuckDuckGo", 
     "https://duck.com/?q=%s"]')
-  mkdir --parents $SNAP_USER_DATA/.config/Typora/conf
-  echo "${CONF}" > $SNAP_USER_DATA/.config/Typora/conf/conf.user.json
+  mkdir --parents "$SNAP_USER_DATA/.config/Typora/conf"
+  echo "${CONF}" > "$SNAP_USER_DATA/.config/Typora/conf/conf.user.json"
+  echo "Snap: Preconfigured user configuration file"
+fi
+
+# Typora only copies resource themes if entire themes dir is missing in user
+# configuration. Copy newly packaged themes so users don't have to.
+if [ -d "$SNAP_USER_DATA/.config/Typora/themes" ]; then
+  for FILE in "$SNAP/typora/resources/app/style/themes/"*; do
+    FILE_NAME=$(basename "$FILE")
+    if [ ! -e "$SNAP_USER_DATA/.config/Typora/themes/$FILE_NAME" ]; then
+      cp --recursive "$FILE" "$SNAP_USER_DATA/.config/Typora/themes/"
+      echo "Snap: Added theme files $FILE_NAME"
+    fi
+  done
 fi
 
 # Execute snap command
