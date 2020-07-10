@@ -19,6 +19,11 @@ confinement: strict
 architectures: 
   - build-on: amd64
 
+plugs:
+  browser-sandbox:
+    allow-sandbox: false
+    interface: browser-support
+
 apps:
   typora:
     command: wrapper $SNAP/Typora --no-sandbox
