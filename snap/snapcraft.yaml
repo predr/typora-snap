@@ -51,7 +51,7 @@ apps:
 parts:
   latest:
     plugin: dump
-    source: ./Typora-linux-x64.tar.gz #https://typora.io/linux/Typora-linux-x64.tar.gz
+    source: https://typora.io/linux/Typora-linux-x64.tar.gz
     source-type: tar
     override-build: |
       snapcraftctl build

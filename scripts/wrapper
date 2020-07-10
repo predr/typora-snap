@@ -1,6 +1,6 @@
 #!/bin/bash
 function log {
-    echo "$*"
+    echo "Snap: $*"
 }
 
 # Update user configuration on first start to hide app menu and add DuckDuckGo
@@ -12,7 +12,7 @@ if [ ! -f "$SNAP_USER_DATA/.config/Typora/conf/conf.user.json" ]; then
     "https://duck.com/?q=%s"]')
   mkdir --parents "$SNAP_USER_DATA/.config/Typora/conf"
   echo "${CONF}" > "$SNAP_USER_DATA/.config/Typora/conf/conf.user.json"
-  echo "Snap: Preconfigured user configuration file"
+  log "Preconfigured user configuration file"
 fi
 
 # Typora only copies resource themes if entire themes dir is missing in user
@@ -22,7 +22,7 @@ if [ -d "$SNAP_USER_DATA/.config/Typora/themes" ]; then
     FILE_NAME=$(basename "$FILE")
     if [ ! -e "$SNAP_USER_DATA/.config/Typora/themes/$FILE_NAME" ]; then
       cp --recursive "$FILE" "$SNAP_USER_DATA/.config/Typora/themes/"
-      echo "Snap: Added theme files $FILE_NAME"
+      log "Added theme files $FILE_NAME"
     fi
   done
 fi
