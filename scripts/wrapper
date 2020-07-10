@@ -1,0 +1,18 @@
+#!/bin/bash
+function log {
+    echo "$*"
+}
+
+# Update configuration on first start to hide app menu and add DuckDuckGo as a
+# text search option.
+if [ ! -f $SNAP_USER_DATA/.config/Typora/conf/conf.user.json ]; then
+  CONF=$(sed 's| //.*||' $SNAP/resources/app/conf.default.json | tail -n +2)
+  CONF=$(echo "${CONF}" | jq '.autoHideMenuBar = "true"')
+  CONF=$(echo "${CONF}" | jq '.searchService[1] = ["Search with DuckDuckGo", 
+    "https://duck.com/?q=%s"]')
+  mkdir --parents $SNAP_USER_DATA/.config/Typora/conf
+  echo "${CONF}" > $SNAP_USER_DATA/.config/Typora/conf/conf.user.json
+fi
+
+# Execute snap command
+exec "$@"
