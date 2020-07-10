@@ -113,3 +113,4 @@ parts:
       for snap in "core18" "gnome-3-28-1804"; do
         cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
       done
+      chmod 755 $SNAPCRAFT_PRIME/chrome-sandbox
