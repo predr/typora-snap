@@ -24,9 +24,13 @@ plugs:
     allow-sandbox: false
     interface: browser-support
 
+layout:
+  /usr/share/pandoc/data:
+    bind: $SNAP/usr/share/pandoc/data
+
 apps:
   typora:
-    command: wrapper $SNAP/Typora --no-sandbox
+    command: wrapper $SNAP/typora/Typora --no-sandbox
     extensions: [gnome-3-28]
     environment:
       DISABLE_WAYLAND: '1'
@@ -43,19 +47,23 @@ apps:
       - network
       - gsettings
       - audio-playback
-      - pulseaudio
 
 parts:
   latest:
     plugin: dump
-    source: https://typora.io/linux/Typora-linux-x64.tar.gz
+    source: ./Typora-linux-x64.tar.gz #https://typora.io/linux/Typora-linux-x64.tar.gz
     source-type: tar
     override-build: |
       snapcraftctl build
       snapcraftctl set-version $(cat resources/app/package.json | jq -r .version)
     build-packages:
       - jq
-    stage-packages:
+    organize:
+      '*': typora/
+
+  stage:
+      plugin: nil
+      stage-packages:
       - jq
       - libnspr4
       - libnss3
@@ -77,32 +85,35 @@ parts:
       - -LICENSE
       - -src
       - -Snip2017*.png
+      - -thumbnail.png
+      - -preview.png
+      - -lorem-ipsum.md
     organize:
-      ash*: resources/app/style/themes/
+      ash*: typora/resources/app/style/themes/
     
   theme-monospace:
     source: https://github.com/typora/typora-monospace-theme.git
     plugin: dump
     stage: *theme-remove
     organize:
-      monospace*: resources/app/style/themes/
+      monospace*: typora/resources/app/style/themes/
 
   theme-lostkeys:
     source: https://github.com/typora/Typora-Lostkeys-Theme.git
     plugin: dump
     stage: *theme-remove
     organize:
-      theme/lostkeys*: resources/app/style/themes/
+      theme/lostkeys*: typora/resources/app/style/themes/
 
   theme-saffron:
     source: https://github.com/Akash-Panigrahi/typora-saffron-theme.git
     plugin: dump
     stage: *theme-remove
     organize:
-      saffron*: resources/app/style/themes/
+      saffron*: typora/resources/app/style/themes/
 
   cleanup:
-    after: [latest]
+    after: [latest, stage]
     plugin: nil
     build-snaps: [core18, gnome-3-28-1804]
     override-prime: |
@@ -120,4 +131,4 @@ parts:
       for snap in "core18" "gnome-3-28-1804"; do
         cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
       done
-      chmod 755 $SNAPCRAFT_PRIME/chrome-sandbox
+      chmod 755 $SNAPCRAFT_PRIME/typora/chrome-sandbox
