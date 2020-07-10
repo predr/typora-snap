@@ -89,6 +89,7 @@ parts:
       theme/lostkeys*: resources/app/style/themes/
 
   cleanup:
+    after: [latest]
     plugin: nil
     build-snaps: [core18, gnome-3-28-1804]
     override-prime: |
