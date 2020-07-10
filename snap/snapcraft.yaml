@@ -32,6 +32,7 @@ apps:
       DISABLE_WAYLAND: '1'
     plugs:
       - browser-support
+      - browser-sandbox
       - desktop
       - desktop-legacy
       - wayland
