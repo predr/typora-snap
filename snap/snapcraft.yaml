@@ -61,6 +61,7 @@ parts:
       - libnss3
       - libxss1
       - pandoc
+      - pandoc-data
 
   wrapper:
     source: scripts
@@ -72,11 +73,10 @@ parts:
     source: https://github.com/typora/typora-ash-theme.git
     plugin: dump
     stage: &theme-remove
-      - -src
-      - -LICENSE
       - -README.md
-      - -preview.png
-      - -thumbnail.png
+      - -LICENSE
+      - -src
+      - -Snip2017*.png
     organize:
       ash*: resources/app/style/themes/
     
@@ -93,6 +93,13 @@ parts:
     stage: *theme-remove
     organize:
       theme/lostkeys*: resources/app/style/themes/
+
+  theme-saffron:
+    source: https://github.com/Akash-Panigrahi/typora-saffron-theme.git
+    plugin: dump
+    stage: *theme-remove
+    organize:
+      saffron*: resources/app/style/themes/
 
   cleanup:
     after: [latest]
