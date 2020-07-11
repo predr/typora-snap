@@ -61,21 +61,18 @@ parts:
     organize:
       '*': typora/
 
-  stage:
-      plugin: nil
-      stage-packages:
+  wrapper:
+    source: scripts
+    plugin: dump
+    organize:
+      wrapper: bin/wrapper
+    stage-packages:
       - jq
       - libnspr4
       - libnss3
       - libxss1
       - pandoc
       - pandoc-data
-
-  wrapper:
-    source: scripts
-    plugin: dump
-    organize:
-      wrapper: bin/wrapper
 
   theme-ash:
     source: https://github.com/typora/typora-ash-theme.git
@@ -84,6 +81,7 @@ parts:
       - -README.md
       - -LICENSE
       - -src
+      - -demo
       - -Snip2017*.png
       - -thumbnail.png
       - -preview.png
@@ -113,7 +111,7 @@ parts:
       saffron*: typora/resources/app/style/themes/
 
   cleanup:
-    after: [latest, stage]
+    after: [latest, wrapper]
     plugin: nil
     build-snaps: [core18, gnome-3-28-1804]
     override-prime: |
