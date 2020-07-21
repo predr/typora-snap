@@ -128,4 +128,4 @@ parts:
       for snap in "core18" "gnome-3-28-1804"; do
         cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
       done
-      chmod 4755 $SNAPCRAFT_PRIME/typora/chrome-sandbox
+      chmod 755 $SNAPCRAFT_PRIME/typora/chrome-sandbox
