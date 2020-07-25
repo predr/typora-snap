@@ -109,4 +109,4 @@ parts:
       find $SNAPCRAFT_PRIME/usr/share/man/ -type f -delete
       find $SNAPCRAFT_PRIME/ -type d -empty -delete
       sudo chown root $SNAPCRAFT_PRIME/typora/chrome-sandbox
-      chmod 4755 $SNAPCRAFT_PRIME/typora/chrome-sandbox
+      chmod 755 $SNAPCRAFT_PRIME/typora/chrome-sandbox
