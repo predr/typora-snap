@@ -12,7 +12,7 @@ if [ ! -f "$SNAP_USER_DATA/.config/Typora/conf/conf.user.json" ]; then
     "https://duck.com/?q=%s"]')
   mkdir --parents "$SNAP_USER_DATA/.config/Typora/conf"
   echo "${CONF}" > "$SNAP_USER_DATA/.config/Typora/conf/conf.user.json"
-  log "Preconfigured user configuration file"
+  log "Copied configuration file to user directory"
 fi
 
 # Typora only copies resource themes if entire themes dir is missing in user
@@ -22,7 +22,7 @@ if [ -d "$SNAP_USER_DATA/.config/Typora/themes" ]; then
     FILE_NAME=$(basename "$FILE")
     if [ ! -e "$SNAP_USER_DATA/.config/Typora/themes/$FILE_NAME" ]; then
       cp --recursive "$FILE" "$SNAP_USER_DATA/.config/Typora/themes/"
-      log "Added theme files $FILE_NAME"
+      log "Copied theme files $FILE_NAME to user directory"
     fi
   done
 fi
