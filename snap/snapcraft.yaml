@@ -1,4 +1,3 @@
-# Builds from latest tar release and includes several themes and pandoc.
 # https://snapcraft.io/docs/snapcraft-yaml-reference
 name: typora
 summary: A minimal Markdown reading and writing app
@@ -60,34 +59,6 @@ parts:
       - jq
     organize:
       '*': typora/
-
-  theme-ash:
-    source: https://github.com/typora/typora-ash-theme.git
-    plugin: dump
-    override-build: cp --recursive ash* $SNAPCRAFT_PART_INSTALL/
-    organize:
-      ash*: typora/resources/app/style/themes/
-    
-  theme-monospace:
-    source: https://github.com/typora/typora-monospace-theme.git
-    plugin: dump
-    override-build: cp --recursive monospace* $SNAPCRAFT_PART_INSTALL/
-    organize:
-      monospace*: typora/resources/app/style/themes/
-
-  theme-lostkeys:
-    source: https://github.com/typora/Typora-Lostkeys-Theme.git
-    plugin: dump
-    override-build: cp --recursive theme/lostkeys* $SNAPCRAFT_PART_INSTALL/
-    organize:
-      lostkeys*: typora/resources/app/style/themes/
-
-  theme-saffron:
-    source: https://github.com/Akash-Panigrahi/typora-saffron-theme.git
-    plugin: dump
-    override-build: cp --recursive saffron* $SNAPCRAFT_PART_INSTALL/
-    organize:
-      saffron*: typora/resources/app/style/themes/
 
   wrapper:
     source: scripts

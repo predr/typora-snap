@@ -15,17 +15,7 @@ if [ ! -f "$SNAP_USER_DATA/.config/Typora/conf/conf.user.json" ]; then
   log "Copied configuration file to user directory"
 fi
 
-# Typora only copies resource themes if entire themes dir is missing in user
-# configuration. Copy newly packaged themes so users don't have to.
-if [ -d "$SNAP_USER_DATA/.config/Typora/themes" ]; then
-  for FILE in "$SNAP/typora/resources/app/style/themes/"*; do
-    FILE_NAME=$(basename "$FILE")
-    if [ ! -e "$SNAP_USER_DATA/.config/Typora/themes/$FILE_NAME" ]; then
-      cp --recursive "$FILE" "$SNAP_USER_DATA/.config/Typora/themes/"
-      log "Copied theme files $FILE_NAME to user directory"
-    fi
-  done
-fi
+# TODO implement content snap for themes
 
 # Execute snap command
 exec "$@"
