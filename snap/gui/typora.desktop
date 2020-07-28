@@ -8,8 +8,5 @@ GenericName=Markdown Editor
 Comment=A minimal Markdown reading and writing app
 Categories=Office;WordProcessor;
 MimeType=text/markdown;text/x-markdown;
-Icon=${SNAP}/meta/gui/icon.svg
+Icon=${SNAP}/meta/gui/icon.png
 Exec=typora %U
-
-
-
