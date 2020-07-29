@@ -22,6 +22,9 @@ plugs:
   browser-sandbox:
     allow-sandbox: false
     interface: browser-support
+  themes:
+    interface: content
+    target: $SNAP/themes
 
 layout:
   /usr/share/pandoc/data:
@@ -46,6 +49,7 @@ apps:
       - network
       - gsettings
       - audio-playback
+      - themes
 
 parts:
   typora:
