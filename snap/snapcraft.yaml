@@ -32,10 +32,8 @@ layout:
 
 apps:
   typora:
-    command: wrapper $SNAP/typora/Typora --no-sandbox
+    command: wrapper $SNAP/typora/Typora --no-sandbox --disable-gpu
     extensions: [gnome-3-28]
-    environment:
-      DISABLE_WAYLAND: '1'
     plugs:
       - browser-support
       - browser-sandbox
