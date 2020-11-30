@@ -50,6 +50,7 @@ apps:
       - gsettings
       - audio-playback
       - themes
+      - removable-media
 
 parts:
   typora:
