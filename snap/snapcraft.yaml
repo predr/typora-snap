@@ -59,7 +59,7 @@ parts:
     plugin: dump
     override-build: |
       snapcraftctl build
-      snapcraftctl set-version $(cat resources/app/package.json | jq -r .version)
+      snapcraftctl set-version $(cat resources/package.json | jq -r .version)
     build-packages:
       - jq
     organize:
