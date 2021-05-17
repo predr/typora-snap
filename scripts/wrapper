@@ -3,39 +3,5 @@ function log {
     echo "Snap: $*"
 }
 
-# Update user configuration on first start to hide app menu and add DuckDuckGo
-# as secondary text search option. Comments cause issues so they are stripped.
-if [ ! -f "$SNAP_USER_DATA/.config/Typora/conf/conf.user.json" ]; then
-  CONF=$(sed 's| //.*||' "$SNAP/typora/resources/app/conf.default.json" | tail -n +2)
-  CONF=$(echo "${CONF}" | jq '.autoHideMenuBar = "true"')
-  CONF=$(echo "${CONF}" | jq '.searchService[1] = ["Search with DuckDuckGo", 
-    "https://duck.com/?q=%s"]')
-  mkdir --parents "$SNAP_USER_DATA/.config/Typora/conf"
-  echo "${CONF}" > "$SNAP_USER_DATA/.config/Typora/conf/conf.user.json"
-  log "Copied configuration file to user directory"
-fi
-
-# Connect to content snap and link to themes if themes directory is present.
-if [ -d "$SNAP_USER_DATA"/.config/Typora/themes ]; then
-  if [ -d "$SNAP"/themes ]; then
-    for FILE in "$SNAP/themes/"*; do
-      FILE_NAME=$(basename "$FILE")
-      if [ ! -e "$SNAP_USER_DATA"/.config/Typora/themes/"$FILE_NAME" ]; then
-        ln -s /snap/"$SNAP_NAME"/current/themes/"$FILE_NAME" "$SNAP_USER_DATA"/.config/Typora/themes/
-        log "Linked theme files $FILE_NAME to user directory"
-      fi
-    done
-  else
-    for LINK in "$SNAP_USER_DATA"/.config/Typora/themes/"$FILE_NAME"*; do
-      if [ -L "$LINK" ]; then
-        rm --force "$LINK"
-        log "Removed linked theme files $FILE_NAME from user directory"
-      fi
-    done
-  fi
-else
-  log "Typora config not initialised yet"
-fi
-
 # Execute snap command
 exec "$@"
