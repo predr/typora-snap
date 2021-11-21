@@ -50,7 +50,7 @@ apps:
 
 parts:
   typora:
-    source: https://typora.io/linux/Typora-linux-x64.tar.gz
+    source: https://download.typora.io/linux/Typora-linux-x64.tar.gz
     source-type: tar
     plugin: dump
     override-build: |
