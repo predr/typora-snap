@@ -43,9 +43,7 @@ apps:
       - x11
       - opengl
       - home
-      - personal-files
       - system-backup
-      - system-files
       - system-observe
       - network
       - gsettings
