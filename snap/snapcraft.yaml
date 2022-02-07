@@ -22,6 +22,11 @@ plugs:
   browser-sandbox:
     allow-sandbox: false
     interface: browser-support
+  system-files:
+    interface: system-files
+    read:
+    - /usr/bin
+    - /usr/local/bin
 
 layout:
   /usr/share/pandoc/data:
@@ -49,6 +54,7 @@ apps:
       - gsettings
       - audio-playback
       - removable-media
+      - system-files
 
 parts:
   typora:
