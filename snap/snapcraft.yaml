@@ -17,6 +17,7 @@ grade: stable
 confinement: strict
 architectures: 
   - build-on: amd64
+  - build-on: arm64
 
 plugs:
   browser-sandbox:
@@ -58,7 +59,9 @@ apps:
 
 parts:
   typora:
-    source: https://typora.io/linux/Typora-linux-x64.tar.gz
+    source: 
+    - on amd64: https://download.typora.io.sgp1.digitaloceanspaces.com/linux/Typora-linux-x64.tar.gz
+    - on arm64: https://download.typora.io.sgp1.digitaloceanspaces.com/linux/Typora-linux-arm64.tar.gz
     source-type: tar
     plugin: dump
     override-build: |
