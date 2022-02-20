@@ -60,8 +60,8 @@ apps:
 parts:
   typora:
     source: 
-    - on amd64: https://download.typora.io.sgp1.digitaloceanspaces.com/linux/Typora-linux-x64.tar.gz
-    - on arm64: https://download.typora.io.sgp1.digitaloceanspaces.com/linux/Typora-linux-arm64.tar.gz
+    - on amd64: https://download.typora.io/linux/Typora-linux-x64.tar.gz
+    - on arm64: https://download.typora.io/linux/Typora-linux-arm64.tar.gz
     source-type: tar
     plugin: dump
     override-build: |
