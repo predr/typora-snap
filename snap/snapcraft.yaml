@@ -12,7 +12,7 @@ description: |
   source resources for user customization of themes.
 
 adopt-info: typora
-base: core18
+base: core20
 grade: stable
 confinement: strict
 architectures: 
@@ -36,7 +36,7 @@ layout:
 apps:
   typora:
     command: wrapper $SNAP/typora/Typora --no-sandbox --disable-gpu
-    extensions: [gnome-3-28]
+    extensions: [gnome-3-38]
     environment:
       DISABLE_WAYLAND: '1'
     plugs:
@@ -86,7 +86,7 @@ parts:
   cleanup:
     after: [typora, wrapper]
     plugin: nil
-    build-snaps: [core18, gnome-3-28-1804]
+    build-snaps: [core20, gnome-3-38-2004]
     override-prime: |
       find $SNAPCRAFT_PRIME/usr/share/doc/ -type f -not -name 'copyright' -delete
       find $SNAPCRAFT_PRIME/usr/share/man/ -type f -delete
