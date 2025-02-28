@@ -61,7 +61,7 @@ parts:
   typora:
     source: 
     - on amd64: https://download.typora.io/linux/Typora-linux-x64.tar.gz?0911
-    - on arm64: https://download.typora.io/linux/Typora-linux-arm64.tar.gz
+    - on arm64: https://download.typora.io/linux/Typora-linux-arm64.tar.gz?0228
     source-type: tar
     plugin: dump
     override-build: |
